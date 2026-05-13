@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VR-test interculturele samenwerking</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #7b5e57;
+      --secondary: #d8c3b5;
+      --accent: #c9a9a6;
+      --light: #f8f3ef;
+      --text: #2f2a28;
+      --muted: #7b7470;
+      --white: #ffffff;
+      --soft-pink: #f3e7e5;
+      --soft-orange: #efe2d8;
+      --soft-green: #f2ece7;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--light);
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      background: #b89b8c;
+      color: white;
+      padding: 80px 20px;
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    header::before { width: 320px; height: 320px; top: -100px; right: -80px; }
+    header::after { width: 220px; height: 220px; bottom: -90px; left: -60px; }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    header p {
+      max-width: 780px;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 24px;
+      padding: 22px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .hero-image {
+      width: 100%;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.25);
+      object-fit: cover;
+    }
+
+    .vr-icon { font-size: 4rem; margin-bottom: 15px; }
+    .hero-card h2 {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      white-space: nowrap;
+    }
+
+    .button {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .button:hover { background: #f4ebe7; transform: translateY(-2px); }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
+
+    section {
+      background: white;
+      margin-bottom: 30px;
+      padding: 38px;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(31, 41, 55, 0.08);
+    }
+
+    h2 { color: var(--primary); margin-bottom: 18px; font-size: 1.75rem; }
+    h3 { color: var(--primary); }
+    p { margin-bottom: 14px; }
+    ul, ol { margin-left: 22px; margin-top: 10px; }
+    li { margin-bottom: 8px; }
+
+    .intro-grid,
+    .compare,
+    .cards,
+    .timeline,
+    .question-list {
+      display: grid;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .intro-grid, .compare { grid-template-columns: 1fr 1fr; }
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .info-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .timeline {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .question-list { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+
+    .info-panel {
+      background: var(--soft-pink);
+      padding: 24px;
+      border-radius: 18px;
+      border-left: 5px solid var(--primary);
+    }
+
+    .card {
+      background: #f6efea;
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid #ddd0c7;
+      transition: 0.3s ease;
+    }
+
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(31, 41, 55, 0.09); }
+    .card .icon {
+      display: none;
+    }
+    .card h3 { margin-bottom: 10px; }
+
+    .compare-box,
+    .step,
+    .question {
+      background: var(--soft-green);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .compare-box.vr { background: var(--soft-orange); border: 1px solid #ffd6bf; }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .duration-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .duration-table th,
+    .duration-table td {
+      text-align: left;
+      padding: 15px;
+      border-bottom: 1px solid #f0ddd7;
+    }
+
+    .duration-table th { background: var(--primary); color: white; }
+    .duration-table tr:last-child td { border-bottom: none; font-weight: bold; background: var(--soft-pink); }
+
+    .highlight {
+      background: var(--soft-pink);
+      border-left: 5px solid var(--primary);
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 18px;
+    }
+
+    .cta {
+      text-align: center;
+      background: #a98574;
+      color: white;
+      padding: 45px;
+    }
+
+    .cta h2 { color: white; font-size: 2rem; }
+
+    .qr-box {
+      margin: 40px auto 0;
+      background: white;
+      color: var(--text);
+      padding: 40px;
+      border-radius: 24px;
+      max-width: 470px;
+      border: 2px solid #ddd0c7;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+    }
+
+    .qr-label {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .qr-box img {
+      width: 100%;
+      max-width: 340px;
+      display: block;
+      margin: 0 auto 16px;
+    }
+
+    .question { border-left: 4px solid var(--accent); }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .team-card {
+      background: #f6efea;
+      border: 1px solid #ddd0c7;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .team-card img {
+      width: 95px;
+      height: 95px;
+      display: block;
+      margin: 12px auto 0;
+      border-radius: 12px;
+      background: white;
+      padding: 8px;
+    }
+
+    .team-link {
+      display: inline-block;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .team-link:hover {
+      color: var(--accent);
+    }
+
+    .text-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--primary);
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .text-link:hover { text-decoration: underline; }
+
+    .footer-note {
+      background: white;
+      border-top: 1px solid #f0ddd7;
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 800px) {
+      .hero, .intro-grid, .compare, .cards, .timeline, .info-cards {
+        grid-template-columns: 1fr;
+      }
+      header h1 { font-size: 2.25rem; }
+      section, .cta { padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Vervang overal https://docs.google.com/forms/d/e/1FAIpQLSdpp4_7oQSt8snD8H_goADzww8uTjaWlXVpPKo7B67Z5NykVg/viewform?usp=publish-editor door de Google Forms-link van jullie korte reflectievragenlijst na de VR-video. -->
+
+  <header>
+    <div class="hero">
+      <div>
+        <span class="badge">Bachelorproef Arteveldehogeschool · 2026</span>
+        <h1>VR-test rond interculturele samenwerking</h1>
+        <p>
+          Stap via VR in een interculturele werksituatie en reflecteer nadien op communicatie en samenwerking binnen Vlaamse KMO’s.
+        </p>
+        <a class="button" href="#vragenlijst">Vragenlijst invullen</a>
+      </div>
+
+      <div class="hero-card">
+        <img class="hero-image" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAJYAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL.../jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAx
+NDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy
+MjIyMjIyMjL/wAARCAJYAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUF
+BAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVW
+V1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi
+4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAEC
+AxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVm
+Z2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq
+8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5vooor+Uz/fwKKKKACiiigAoooo alt="VR-scène interculturele samenwerking" />
+        <h2>Bekijk. Observeer. Reflecteer.</h2>
+        <p>
+          Na het bekijken van de VR-video vragen we wat u zelf heeft opgemerkt. Er zijn geen juiste of foute antwoorden.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Hoe werkt het?</h2>
+      <div class="timeline">
+        <div class="step"><div class="step-number">1</div><h3>Bekijk de VR-video</h3><p>Ervaar een interculturele werksituatie via de VR-bril.</p></div>
+        <div class="step"><div class="step-number">2</div><h3>Observeer de situatie</h3><p>Let op communicatie, reacties en samenwerking tussen collega’s.</p></div>
+        <div class="step"><div class="step-number">3</div><h3>Scan de QR-code</h3><p>Gebruik uw smartphone om de vragenlijst te openen.</p></div>
+        <div class="step"><div class="step-number">4</div><h3>Reflecteer</h3><p>Beantwoord enkele korte vragen over uw ervaring.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>Waarover gaat onze bachelorproef?</h2>
+      <p>
+        Deze bachelorproef onderzoekt interculturele samenwerking binnen Vlaamse KMO’s en de mogelijke meerwaarde van Virtual Reality als innovatieve trainingsmethode.
+      </p>
+      <p>
+        Via een VR-ervaring onderzoeken we hoe deelnemers communicatie, samenwerking en mogelijke spanningen binnen een diverse werkomgeving waarnemen.
+      </p>
+
+      <div class="intro-grid">
+        <div class="info-panel">
+          <h3>Doel van het onderzoek</h3>
+          <p>
+            We willen achterhalen welke uitdagingen bestaan binnen interculturele teams en welke ondersteuning medewerkers nodig hebben om beter samen te werken.
+          </p>
+        </div>
+        <div class="info-panel">
+          <h3>Doel van de VR-test</h3>
+          <p>
+            Met deze VR-test onderzoeken we hoe deelnemers een werksituatie in VR waarnemen en welke elementen zij zelf opmerken na het bekijken van de video.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Waarom gebruiken we Virtual Reality?</h2>
+      <p>
+        Virtual Reality maakt het mogelijk om een situatie op een meer ervaringsgerichte manier te bekijken. In plaats van enkel te lezen of te luisteren, krijgt de deelnemer de kans om een werksituatie visueel en auditief te ervaren.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          
+          <h3>Interculturele context</h3>
+          <p>De VR-video wordt gebruikt om te onderzoeken hoe mensen een diverse werksituatie waarnemen.</p>
+        </div>
+        <div class="card">
+          
+          <h3>Communicatie</h3>
+          <p>Deelnemers reflecteren achteraf op communicatie, gedrag, sfeer en mogelijke interpretaties.</p>
+        </div>
+        <div class="card">
+          
+          <h3>Bewustwording</h3>
+          <p>VR kan helpen om stil te staan bij eigen observaties en reacties.</p>
+        </div>
+        <div class="card">
+          
+          <h3>Reflectie</h3>
+          <p>Na de video verzamelen we antwoorden via een korte Google Forms-vragenlijst.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Traditionele training versus VR-training</h2>
+      <p>
+        In onze bachelorproef bekijken we VR als mogelijke aanvulling op bestaande vormen van training rond interculturele communicatie en samenwerking.
+      </p>
+      <div class="compare">
+        <div class="compare-box">
+          <h3>Traditionele training</h3>
+          <ul>
+            <li>Meer gericht op theorie en uitleg.</li>
+            <li>Deelnemers luisteren of lezen vooral.</li>
+            <li>Situaties worden vaak besproken achteraf.</li>
+            <li>De beleving is minder direct.</li>
+          </ul>
+        </div>
+        <div class="compare-box vr">
+          <h3>VR-training</h3>
+          <ul>
+            <li>Meer gericht op ervaring en observatie.</li>
+            <li>Deelnemers bevinden zich in een virtuele situatie.</li>
+            <li>Gedrag en communicatie worden concreet zichtbaar.</li>
+            <li>Reflectie gebeurt op basis van eigen waarneming.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Hoe verloopt de deelname?</h2>
+      <div class="timeline">
+        <div class="step"><div class="step-number">1</div><h3>VR-video bekijken</h3><p>U bekijkt eerst de korte VR-video via de VR-bril.</p></div>
+        <div class="step"><div class="step-number">2</div><h3>Zelf observeren</h3><p>Let op wat u zelf opmerkt in de situatie, zonder voorafgaande uitleg over de inhoud.</p></div>
+        <div class="step"><div class="step-number">3</div><h3>QR-code scannen</h3><p>Na de video scant u de QR-code op deze pagina.</p></div>
+        <div class="step"><div class="step-number">4</div><h3>Reflectievragen invullen</h3><p>U beantwoordt enkele korte vragen via Google Forms.</p></div>
+      </div>
+
+      <table class="duration-table">
+        <tr><th>Onderdeel</th><th>Geschatte duur</th></tr>
+        <tr><td>VR-video bekijken</td><td>± 5 minuten</td></tr>
+        <tr><td>Korte vragenlijst invullen</td><td>± 3 minuten</td></tr>
+        <tr><td>Totale deelname</td><td>± 8 minuten</td></tr>
+      </table>
+
+      <div class="highlight">
+        <p><strong>Belangrijk:</strong> er zijn geen juiste of foute antwoorden. We zijn vooral geïnteresseerd in uw persoonlijke observaties, interpretaties en ervaring met de VR-situatie.</p>
+      </div>
+    </section>
+
+    <section class="cta" id="vragenlijst">
+      <h2>Scan de QR-code na het bekijken van de VR-video</h2>
+      <p>
+        Heeft u de VR-video bekeken? Scan dan de QR-code hieronder en vul de korte reflectievragenlijst in. 
+      </p>
+      <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdpp4_7oQSt8snD8H_goADzww8uTjaWlXVpPKo7B67Z5NykVg/viewform?usp=publish-editor" target="_blank">Open de reflectievragenlijst</a>
+
+      <div class="qr-box">
+        
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=285x285&data=https://docs.google.com/forms/d/e/1FAIpQLSdpp4_7oQSt8snD8H_goADzww8uTjaWlXVpPKo7B67Z5NykVg/viewform?usp=publish-editor" alt="QR-code naar de VR-reflectievragenlijst" />
+        <p><strong>Reflectievragenlijst over de VR-video</strong></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Meer informatie en ondersteuning</h2>
+      <p>
+        Wie na deelname meer wil weten over interculturele communicatie, diversiteit of ondersteuning op de werkvloer, kan terecht bij onderstaande organisaties en informatieplatformen.
+      </p>
+      <div class="cards info-cards">
+        <div class="card">
+          <h3>Agentschap Integratie en Inburgering</h3>
+          <p>Ondersteuning rond integratie, diversiteit en communicatie.</p>
+          <a class="text-link" href="https://www.integratie-inburgering.be/" target="_blank">Website bezoeken</a>
+        </div>
+        <div class="card">
+          <h3>Unia</h3>
+          <p>Informatie over inclusie, gelijke kansen en diversiteit.</p>
+          <a class="text-link" href="https://www.unia.be/" target="_blank">Website bezoeken</a>
+        </div>
+        <div class="card">
+          <h3>VLAIO</h3>
+          <p>Ondersteuning voor Vlaamse ondernemingen en innovatie.</p>
+          <a class="text-link" href="https://www.vlaio.be/" target="_blank">Website bezoeken</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Onderzoeksteam</h2>
+      <p>
+        Dit onderzoek wordt uitgevoerd in het kader van een bachelorproef aan de Arteveldehogeschool. Het project wordt uitgevoerd door:
+      </p>
+      <div class="team">
+        <div class="team-card">
+          <a class="team-link" href="https://www.linkedin.com/in/amber-van-hoylandt-88388b2a5/?skipRedirect=true" target="_blank">Amber</a>
+          <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">LinkedIn-profiel</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.linkedin.com/in/amber-van-hoylandt-88388b2a5/?skipRedirect=true" alt="QR-code LinkedIn Amber" />
+        </div>
+        <div class="team-card">
+          <a class="team-link" href="https://www.linkedin.com/in/julie-roggeman/" target="_blank">Julie</a>
+          <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">LinkedIn-profiel</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.linkedin.com/in/julie-roggeman/" alt="QR-code LinkedIn Julie" />
+        </div>
+        <div class="team-card">
+          <a class="team-link" href="https://www.linkedin.com/in/megann-saey-2a7032333/" target="_blank">Megann</a>
+          <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">LinkedIn-profiel</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.linkedin.com/in/megann-saey-2a7032333/" alt="QR-code LinkedIn Megann" />
+        </div>
+        <div class="team-card">
+          <a class="team-link" href="https://www.linkedin.com/in/sjamsoedin/" target="_blank">Sjamsoedin</a>
+          <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">LinkedIn-profiel</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.linkedin.com/in/sjamsoedin/" alt="QR-code LinkedIn Sjamsoedin" />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Privacy en verwerking</h2>
+      <p>
+        De antwoorden worden enkel gebruikt in het kader van onze bachelorproef aan de Arteveldehogeschool. De resultaten worden verwerkt op groepsniveau en niet gebruikt om individuele deelnemers te beoordelen.
+      </p>
+      <p>
+        Deelname is vrijwillig. De verzamelde antwoorden helpen ons om beter te begrijpen hoe deelnemers een interculturele werksituatie in VR ervaren en welke inzichten hieruit kunnen voortkomen.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer-note">
+    Bachelorproef Organisatie en Management — Business and Languages — International Relations · Arteveldehogeschool 2026
+  </footer>
+</body>
+</html>
