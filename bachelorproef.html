@@ -31,8 +31,99 @@ h2{color:var(--primary);margin-bottom:18px;font-size:1.75rem}h3{color:var(--prim
 .team-link{display:inline-block;color:var(--primary);font-size:1.1rem;font-weight:bold;margin-bottom:10px;text-decoration:none;transition:.3s ease}.team-link:hover{color:var(--accent)}.text-link{display:inline-block;margin-top:10px;color:var(--primary);font-weight:bold;text-decoration:none}.text-link:hover{text-decoration:underline}
 .footer-note{background:white;border-top:1px solid #f0ddd7;text-align:center;padding:30px 20px;color:var(--muted);font-size:.95rem}
 @media(max-width:800px){.hero,.intro-grid,.compare,.cards,.timeline,.info-cards{grid-template-columns:1fr}.nav-inner{align-items:flex-start;flex-direction:column}header h1{font-size:2.25rem}section,.cta{padding:26px}}
-</style></head><body><nav><div class="nav-inner"><a class="logo" href="index.html">Bachelorproef Arteveldehogeschool · 2026</a><div class="nav-links"><a class="" href="index.html">Home</a><a class="active" href="bachelorproef.html">Bachelorproef</a><a class="" href="deelname.html">Deelname</a><a class="" href="vragenlijst.html">Vragenlijst</a><a class="" href="info-team.html">Info & team</a></div></div></nav>
-<header><div class="hero"><div><span class="badge">Bachelorproef</span><h1>Waarover gaat onze bachelorproef?</h1><p>We onderzoeken interculturele samenwerking binnen Vlaamse KMO’s en de mogelijke meerwaarde van Virtual Reality als innovatieve trainingsmethode.</p></div></div></header>
-<main><section><h2>Waarover gaat onze bachelorproef?</h2><p>Deze bachelorproef onderzoekt interculturele samenwerking binnen Vlaamse KMO’s en de mogelijke meerwaarde van Virtual Reality als innovatieve trainingsmethode.</p><p>Via een VR-ervaring onderzoeken we hoe deelnemers communicatie, samenwerking en mogelijke spanningen binnen een diverse werkomgeving waarnemen.</p><div class="intro-grid"><div class="info-panel"><h3>Doel van het onderzoek</h3><p>We willen achterhalen welke uitdagingen bestaan binnen interculturele teams en welke ondersteuning medewerkers nodig hebben om beter samen te werken.</p></div><div class="info-panel"><h3>Doel van de VR-test</h3><p>Met deze VR-test onderzoeken we hoe deelnemers een werksituatie in VR waarnemen en welke elementen zij zelf opmerken na het bekijken van de video.</p></div></div></section>
-<section><h2>Waarom gebruiken we Virtual Reality?</h2><p>Virtual Reality maakt het mogelijk om een situatie op een meer ervaringsgerichte manier te bekijken. In plaats van enkel te lezen of te luisteren, krijgt de deelnemer de kans om een werksituatie visueel en auditief te ervaren.</p><div class="cards"><div class="card"><h3>Interculturele context</h3><p>De VR-video wordt gebruikt om te onderzoeken hoe mensen een diverse werksituatie waarnemen.</p></div><div class="card"><h3>Communicatie</h3><p>Deelnemers reflecteren achteraf op communicatie, gedrag, sfeer en mogelijke interpretaties.</p></div><div class="card"><h3>Bewustwording</h3><p>VR kan helpen om stil te staan bij eigen observaties en reacties.</p></div><div class="card"><h3>Reflectie</h3><p>Na de video verzamelen we antwoorden via een korte Google Forms-vragenlijst.</p></div></div></section>
-<section><h2>Traditionele training versus VR-training</h2><p>In onze bachelorproef bekijken we VR als mogelijke aanvulling op bestaande vormen van training rond interculturele communicatie en samenwerking.</p><div class="compare"><div class="compare-box"><h3>Traditionele training</h3><ul><li>Meer gericht op theorie en uitleg.</li><li>Deelnemers luisteren of lezen vooral.</li><li>Situaties worden vaak besproken achteraf.</li><li>De beleving is minder direct.</li></ul></div><div class="compare-box vr"><h3>VR-training</h3><ul><li>Meer gericht op ervaring en observatie.</li><li>Deelnemers bevinden zich in een virtuele situatie.</li><li>Gedrag en communicatie worden concreet zichtbaar.</li><li>Reflectie gebeurt op basis van eigen waarneming.</li></ul></div></div></section></main><footer class="footer-note">Bachelorproef Organisatie en Management — Business and Languages — International Relations · Arteveldehogeschool 2026</footer></body></html>
+
+.quiz-card{
+  background:#eaf4ff;
+  color:#2f3a33;
+  border:1px solid #b7d7f2;
+  border-left:6px solid #9fc5e8;
+  border-radius:22px;
+  padding:22px;
+  text-align:left;
+  box-shadow:0 12px 28px rgba(31,41,55,.10);
+}
+.quiz-card h2{
+  color:#3f6f91;
+  font-size:1.35rem;
+  margin-bottom:10px;
+  white-space:normal;
+}
+.quiz-card p{
+  font-size:.95rem;
+  margin-bottom:12px;
+}
+.quiz-option{
+  display:block;
+  background:white;
+  border:1px solid #cfe3f5;
+  border-radius:12px;
+  padding:9px 11px;
+  margin-bottom:8px;
+  cursor:pointer;
+  font-size:.92rem;
+}
+.quiz-option input{
+  margin-right:8px;
+}
+.quiz-button{
+  background:#6f8f7a;
+  color:white;
+  border:none;
+  border-radius:999px;
+  padding:10px 16px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:6px;
+}
+.quiz-button:hover{
+  background:#5d7d68;
+}
+.quiz-result{
+  display:none;
+  background:white;
+  border-radius:12px;
+  padding:12px;
+  margin-top:12px;
+  border:1px solid #cfe3f5;
+  font-size:.92rem;
+}
+</style></head><body><nav><div class="nav-inner"><a class="logo" href="index.html">Bachelorproef Arteveldehogeschool · 2026</a><div class="nav-links"><a class="" href="index.html">Home</a><a class="active" href="bachelorproef.html">Bachelorproef</a><a class="" href="deelname.html">Deelname</a><a class="" href="vragenlijst.html">Vragenlijst</a><a class="" href="info-team.html">Over ons</a></div></div></nav>
+<header><div class="hero"><div><h1>Ontdek waarom interculturele samenwerking ertoe doet</h1></div>
+<div class="quiz-card">
+  <h2>💭 Wat denk jij?</h2>
+  <p><strong>Wat veroorzaakt volgens jou het vaakst misverstanden binnen interculturele teams?</strong></p>
+
+  <label class="quiz-option"><input type="radio" name="misverstanden" value="communicatiestijl"> Verschillen in communicatiestijl</label>
+  <label class="quiz-option"><input type="radio" name="misverstanden" value="taal"> Taalbarrières</label>
+  <label class="quiz-option"><input type="radio" name="misverstanden" value="hierarchie"> Verschillen in omgang met hiërarchie</label>
+  <label class="quiz-option"><input type="radio" name="misverstanden" value="feedback"> Verschillende verwachtingen rond feedback</label>
+
+  <button class="quiz-button" onclick="checkQuizAnswer()">Controleer je antwoord</button>
+
+  <div id="quiz-result" class="quiz-result"></div>
+</div>
+</div></header>
+<main><section><h2>Ons onderzoek in het kort</h2><p>In Vlaamse KMO’s werken collega’s met verschillende culturele achtergronden steeds vaker samen. Dat biedt kansen, maar kan ook zorgen voor misverstanden in communicatie, feedback of samenwerking.</p><p>Met deze bachelorproef onderzoeken we hoe jouw organisatie zulke situaties beter kan begrijpen en hoe VR kan helpen om interculturele samenwerking op een veilige, realistische manier bespreekbaar te maken.</p><div class="intro-grid"><div class="info-panel"><h3>Doel van het onderzoek</h3><p>We brengen in kaart welke uitdagingen interculturele teams ervaren en welke ondersteuning medewerkers en organisaties nodig hebben om beter samen te werken.</p></div><div class="info-panel"><h3>Doel van de VR-test</h3><p>Met de VR-test ervaar jij een herkenbare werksituatie. Daarna reflecteer je op wat jij zag, voelde en interpreteerde.</p></div></div></section>
+<section><h2>Waarom gebruiken we Virtual Reality?</h2><p>Virtual Reality laat je een werksituatie beleven in plaats van er alleen over te lezen. Je ziet en hoort wat er gebeurt, waardoor communicatie, sfeer en reacties concreter worden.</p><div class="cards"><div class="card"><h3>Interculturele context</h3><p>De VR-video toont hoe mensen een diverse werksituatie kunnen ervaren en interpreteren.</p></div><div class="card"><h3>Communicatie</h3><p>Je reflecteert achteraf op communicatie, gedrag, sfeer en mogelijke interpretaties.</p></div><div class="card"><h3>Bewustwording</h3><p>VR helpt je bewust stil te staan bij jouw observaties en reacties.</p></div><div class="card"><h3>Reflectie</h3><p>Na de video deel je jouw inzichten via een korte Google Forms-vragenlijst.</p></div></div></section>
+<section><h2>Traditionele training versus VR-training</h2><p>Met deze vergelijking tonen we waarom VR een waardevolle aanvulling kan zijn op bestaande trainingen rond interculturele communicatie en samenwerking.</p><div class="compare"><div class="compare-box"><h3>Traditionele training</h3><ul><li>Meer gericht op theorie en uitleg.</li><li>Je luistert of leest vooral.</li><li>Situaties worden vaak besproken achteraf.</li><li>De beleving is minder direct.</li></ul></div><div class="compare-box vr"><h3>VR-training</h3><ul><li>Meer gericht op ervaring en observatie.</li><li>Je bevindt je in een virtuele situatie.</li><li>Gedrag en communicatie worden concreet zichtbaar.</li><li>Reflectie gebeurt op basis van eigen waarneming.</li></ul></div></div></section></main><footer class="footer-note">Bachelorproef Organisatie en Management — Business and Languages — International Relations · Arteveldehogeschool 2026</footer>
+<script>
+function checkQuizAnswer() {
+  const selected = document.querySelector('input[name="misverstanden"]:checked');
+  const result = document.getElementById('quiz-result');
+
+  if (!selected) {
+    result.style.display = 'block';
+    result.innerHTML = '<strong>Kies eerst een antwoord.</strong>';
+    return;
+  }
+
+  result.style.display = 'block';
+
+  if (selected.value === 'communicatiestijl') {
+    result.innerHTML = '<strong>Juist!</strong><br>Uit ons onderzoek blijkt dat verschillen in communicatiestijl het vaakst werden genoemd als uitdaging. Taalbarrières spelen ook een belangrijke rol, maar vooral het verschil tussen directe en indirecte communicatie kwam duidelijk naar voren.';
+  } else {
+    result.innerHTML = '<strong>Niet helemaal.</strong><br>Uit ons onderzoek blijkt dat verschillen in communicatiestijl het vaakst werden genoemd als uitdaging. Taalbarrières spelen ook een belangrijke rol, maar vooral het verschil tussen directe en indirecte communicatie kwam duidelijk naar voren.';
+  }
+}
+</script>
+</body></html>
